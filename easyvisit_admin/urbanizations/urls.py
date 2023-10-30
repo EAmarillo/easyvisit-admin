@@ -1,9 +1,8 @@
 from django.urls import path
 
-from .views import CartItemViews
-'''
+from .views import UrbanizationView
+
 urlpatterns = [
-    path('cart-items/', CartItemViews.as_view()),
-    path('cart-items/<int:id>', CartItemViews.as_view())
+    path('urbanization', UrbanizationView.as_view()),
+    path('urbanization/<int:id>', UrbanizationView.as_view())
 ]
-'''
