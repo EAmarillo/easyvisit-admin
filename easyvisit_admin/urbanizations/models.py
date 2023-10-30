@@ -18,9 +18,9 @@ class Urbanization(models.Model):
     city = models.CharField(max_length=16)
     state = models.CharField(max_length=16)
     country = models.CharField(max_length=16)
-    zip_code = models.PositiveSmallIntegerField
-    houses = models.PositiveIntegerField
-    is_active = models.BooleanField()
+    zip_code = models.PositiveIntegerField()
+    houses = models.PositiveIntegerField()
+    is_active = models.BooleanField(default=True)
     rfc = models.CharField(max_length=13, null=True)
     email = models.EmailField(max_length=64)
     plan = models.ForeignKey(

@@ -10,8 +10,8 @@ class UrbanizationSerializer(serializers.ModelSerializer):
     city = serializers.CharField(max_length=16)
     state = serializers.CharField(max_length=16)
     country = serializers.CharField(max_length=16)
-    zip_code = serializers.IntegerField
-    houses = serializers.IntegerField
+    zip_code = serializers.IntegerField(max_value=99999)
+    houses = serializers.IntegerField(max_value=999999)
     is_active = serializers.BooleanField(required=False, default=True)
     rfc = serializers.CharField(min_length=13, max_length=13, required=False, default='XXXX000000X00')
     email = serializers.EmailField(max_length=64)
