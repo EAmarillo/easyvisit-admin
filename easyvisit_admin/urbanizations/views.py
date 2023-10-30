@@ -1,14 +1,19 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import status
+from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework.pagination import PageNumberPagination
 from .models import Urbanization
 from .serializers import UrbanizationSerializer
 
 
 # Create your views here.
-class UrbanizationView(APIView):
+class UrbanizationView(GenericAPIView):
     serializer_class = UrbanizationSerializer
+    pagination_class = PageNumberPagination
+
+    def get_queryset(self):
+        return Urbanization.objects.all()
 
     def post(self, request):
         serializer = UrbanizationSerializer(data=request.data)
@@ -45,11 +50,10 @@ class UrbanizationView(APIView):
 
         items = Urbanization.objects.all()
         serializer = UrbanizationSerializer(items, many=True)
-        return Response({
+        return self.get_paginated_response({
             "status": "success",
-            "data": serializer.data
-        }, status=status.HTTP_200_OK
-        )
+            "data": self.paginate_queryset(serializer.data)
+        })
 
     def patch(self, request, id=None):
         item = get_object_or_404(Urbanization, id=id)
