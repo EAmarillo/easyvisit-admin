@@ -2,16 +2,16 @@ from django.db import models
 
 
 # Create your models here.
-class UrbanizationManagers(models.Model):
+class UrbanizationManager(models.Model):
     first_name = models.CharField(max_length=48)
     last_name = models.CharField(max_length=48)
-    phone = models.PositiveIntegerField()
+    phone = models.PositiveBigIntegerField()
     email = models.EmailField(max_length=64)
     is_active = models.BooleanField(default=True)
     urbanization = models.ForeignKey(
         'urbanizations.Urbanization',
         on_delete=models.CASCADE,
-        related_name='urbanization_manager'
+        related_name='urbanizationmanager'
     )
 
     def __str__(self):
