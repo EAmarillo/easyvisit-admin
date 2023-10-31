@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'urbanizations',
-    'urbanization_managers'
+    'urbanization_managers',
+    'places'
 ]
 
 MIDDLEWARE = [
