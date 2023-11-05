@@ -3,7 +3,6 @@ from django.db import models
 
 # Create your models here.
 class Place(models.Model):
-    description = models.TextField(null=True)
     street = models.CharField(max_length=48)
     number = models.CharField(max_length=8)
     neighborhood = models.CharField(max_length=32)

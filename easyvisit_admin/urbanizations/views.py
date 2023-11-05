@@ -40,8 +40,8 @@ class UrbanizationView(GenericAPIView):
 
     def get(self, request, id=None):
         if id:
-            item = get_object_or_404(Urbanization, id=id)
-            serializer = UrbanizationSerializer(item)
+            urbanization = get_object_or_404(Urbanization, id=id)
+            serializer = UrbanizationSerializer(urbanization)
             return Response({
                 "status": "success",
                 "data": serializer.data

@@ -12,7 +12,6 @@ class Role(models.Model):
 
 class APIUser(models.Model):
     phone = models.PositiveBigIntegerField()
-    password = models.CharField(max_length=32)
     first_name = models.CharField(max_length=48)
     last_name = models.CharField(max_length=48)
     email = models.EmailField(max_length=64)
@@ -22,9 +21,8 @@ class APIUser(models.Model):
         on_delete=models.CASCADE,
         related_name='apiuser'
     )
-    role = models.ForeignKey(
+    roles = models.ManyToManyField(
         'users.Role',
-        on_delete=models.CASCADE,
         related_name='apiuser'
     )
 
