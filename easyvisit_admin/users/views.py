@@ -24,10 +24,10 @@ class UserView(GenericAPIView):
     def get_queryset(self):
         return APIUser.objects.all()
 
-    def get(self, request, id=None):
+    def get(self, id=None):
         if id:
-            item = get_object_or_404(APIUser, id=id)
-            serializer = APIUserSerializer(item)
+            user = get_object_or_404(APIUser, id=id)
+            serializer = APIUserSerializer(user)
             return Response({
                 "status": "success",
                 "data": serializer.data
@@ -100,9 +100,7 @@ class UploadCSVFileView(GenericAPIView):
                 street = row["Street"]
                 number = row["Number"]
                 combination = (user_identifier, street, number)
-                print(combination)
                 if combination in seen_combinations:
-                    print("entra")
                     continue
                 else:
                     seen_combinations.add(combination)
@@ -111,13 +109,11 @@ class UploadCSVFileView(GenericAPIView):
                         number__iexact=number
                     ).first()
                     place_id = place.id
-                    print(place_id)
                     if place_id:
                         user = APIUser.objects.filter(
                             phone=user_identifier,
                             place=place_id
                         ).first()
-                        print(user)
                         if user:
                             continue
                         else:
@@ -137,12 +133,9 @@ class UploadCSVFileView(GenericAPIView):
                                 "place": place_id,
                                 "roles": roles
                             }
-                            print(user_data)
                             save_user = APIUserSerializer(data=user_data)
                             if save_user.is_valid():
                                 save_user.save()
-                                print(save_user.save().id)
-
 
             return Response({
                 "status": "success",
