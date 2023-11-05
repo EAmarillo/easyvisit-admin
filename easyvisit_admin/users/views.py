@@ -24,7 +24,7 @@ class UserView(GenericAPIView):
     def get_queryset(self):
         return APIUser.objects.all()
 
-    def get(self, id=None):
+    def get(self, request, id=None):
         if id:
             user = get_object_or_404(APIUser, id=id)
             serializer = APIUserSerializer(user)
