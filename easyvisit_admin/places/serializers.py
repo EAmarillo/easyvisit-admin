@@ -12,9 +12,6 @@ class PlaceSerializers(serializers.ModelSerializer):
     zip_code = serializers.IntegerField(max_value=99999)
     is_active = serializers.BooleanField(required=False, default=True)
     urbanization = serializers.IntegerField
-    description = serializers.CharField(max_length=200,
-                                        allow_null=True,
-                                        required=False)
 
     class Meta:
         model = Place
