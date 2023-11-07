@@ -11,7 +11,6 @@ class UrbanizationViewPostTest(TestCase):
         self.client = APIClient()
 
     def test_create_urbanization(self):
-        # Datos de prueba para crear una nueva urbanización
         urbanization_data = {
             "name": "Sample Urbanization",
             "street": "Main Street",
@@ -28,12 +27,8 @@ class UrbanizationViewPostTest(TestCase):
             "plan": 1
         }
 
-        # Realizar una solicitud POST para crear una nueva urbanización
         response = self.client.post("/urbanization", urbanization_data, format="json")
-        # Verificar que la respuesta sea 201 Created
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-
     def tearDown(self):
-        # Limpia los datos de prueba si es necesario
         Urbanization.objects.all().delete()
